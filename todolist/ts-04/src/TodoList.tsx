@@ -8,6 +8,7 @@ type TodoListPropsType = {
     filter: FilterValuesType
     changeFilter: (filter: FilterValuesType) => void
     addTask: (title: string) => void
+    changeTaskStatus: (id: string, newIsDoneValue: boolean) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
@@ -16,14 +17,21 @@ const TodoList = (props: TodoListPropsType) => {
         const removeTask = () => props.removeTask(task.id)
         return (
             <li key={task.id}>
-                <input type="checkbox" checked={task.isDone}/>
+                <input
+                    type="checkbox"
+                    checked={task.isDone}
+                    onChange={(event) => props.changeTaskStatus(task.id, event.currentTarget.checked)}
+                />
                 <span>{task.title}</span>
                 <button onClick={removeTask}>х</button>
             </li>
         )
     })
     const addTask = () => {
-        props.addTask(title)
+        const trimmedTitle = title.trim() // обрезает пробелы по краям названия таски
+        if (trimmedTitle) {
+            props.addTask(trimmedTitle)
+        }
         setTitle("")
     }
     const onKeyPressAddTask = (event: KeyboardEvent<HTMLInputElement>) => {

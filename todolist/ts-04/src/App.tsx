@@ -47,6 +47,15 @@ function App() {
         setTasks([{id: v1(), title: title, isDone: false}, ...tasks]) // можно просто title
     }
 
+    const changeTaskStatus = (id: string, newIsDoneValue: boolean) => {
+        setTasks(tasks.map(tasks => tasks.id === id ? {...tasks, isDone: newIsDoneValue} : tasks)) // вернет новый массив, а isDone заменится на новое значение в случае изменений
+        /* const task = tasks.find(tasks => tasks.id === id) // альтернативный метод через псевдоложь
+         if(task) {
+             task.isDone = isDone
+             setTasks([...tasks])
+         }*/
+    }
+
     const getTasksForRender = () => {
         switch (filter) {
             case "completed":
@@ -67,6 +76,7 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeTaskStatus={changeTaskStatus}
             />
         </div>
     );
