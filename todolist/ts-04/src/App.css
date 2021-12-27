@@ -7,9 +7,15 @@
     margin-right: 50px;
 }
 .active-filter {
-    background-color: aquamarine;
+    background-color: indianred;
 }
 
 .is-done {
     opacity: 0.5;
+}
+
+.error {
+    border: red 1px solid;
+    outline: none;
+    background-color: rgba(161, 26, 26, 0.3);
 }
