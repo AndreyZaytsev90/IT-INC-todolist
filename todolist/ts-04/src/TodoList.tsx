@@ -15,12 +15,15 @@ const TodoList = (props: TodoListPropsType) => {
     const [title, setTitle] = useState<string>("")
     const tasksList = props.tasks.map((task: TaskType) => { //tasks - массив, task - элемент массива
         const removeTask = () => props.removeTask(task.id)
+
+        const changeStatus = (event: ChangeEvent<HTMLInputElement>) => props.changeTaskStatus(task.id, event.currentTarget.checked) // объект, где содержится сведения о произошедшем событии
+
         return (
-            <li key={task.id}>
+            <li key={task.id} className={task.isDone ? "is-done" : "" }>
                 <input
                     type="checkbox"
                     checked={task.isDone}
-                    onChange={(event) => props.changeTaskStatus(task.id, event.currentTarget.checked)}
+                    onChange={changeStatus}
                 />
                 <span>{task.title}</span>
                 <button onClick={removeTask}>х</button>
@@ -59,9 +62,9 @@ const TodoList = (props: TodoListPropsType) => {
                 {tasksList}
             </ul>
             <div>
-                <button onClick={onClickSetAllFilter}>All</button>
-                <button onClick={onClickSetActiveFilter}>Active</button>
-                <button onClick={onClickSetCompletedFilter}>Completed</button>
+                <button className={props.filter === "all" ? "active-filter": ""} onClick={onClickSetAllFilter}>All</button>
+                <button className={props.filter === "active" ? "active-filter": ""} onClick={onClickSetActiveFilter}>Active</button>
+                <button className={props.filter === "completed" ? "active-filter": ""} onClick={onClickSetCompletedFilter}>Completed</button>
             </div>
         </div>
     )
