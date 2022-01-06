@@ -3,22 +3,27 @@ import React from "react";
 type PropsType = {
     title: string
     title2?: string  // ? - значит что пропс может и не прийти.
+    task: Array<inArray>
 }
 
+type inArray = {
+    id: number
+    title: string
+    isDone: boolean
+}
 
 export const Todolist = (props: PropsType) => {
     return (
         <div>
             <h3>{props.title}</h3>
-            <h5>{props.title2}</h5>
             <div>
                 <input/>
                 <button>+</button>
             </div>
             <ul>
-                <li><input type="checkbox" checked={true}/> <span>HTML&CSS</span></li>
-                <li><input type="checkbox" checked={true}/> <span>JS</span></li>
-                <li><input type="checkbox" checked={false}/> <span>React</span></li>
+                <li><input type="checkbox" checked={props.task[0].isDone}/> <span>{props.task[0].title}</span></li>
+                <li><input type="checkbox" checked={props.task[1].isDone}/> <span>{props.task[1].title}</span></li>
+                <li><input type="checkbox" checked={props.task[2].isDone}/> <span>{props.task[2].title}</span></li>
             </ul>
             <div>
                 <button>All</button>
