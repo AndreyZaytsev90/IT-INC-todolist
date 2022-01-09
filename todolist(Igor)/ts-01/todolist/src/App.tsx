@@ -12,8 +12,8 @@ function App() {
 
     const task2 = [
         { id: 1 , title : "Milk", isDone: true},
-        { id: 2 , title : "Beer", isDone: false},
-        { id: 3 , title : "Meat", isDone: true}
+        { id: 2 , title : "Beer", isDone: true},
+        { id: 3 , title : "Meat", isDone: false}
     ]
 
     return (
