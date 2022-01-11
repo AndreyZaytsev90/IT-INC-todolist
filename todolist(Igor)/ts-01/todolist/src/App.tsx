@@ -11,8 +11,15 @@ function App() {
         { id: 2, title: "JS", isDone: true },
         { id: 3, title: "ReactJS", isDone: false }
     ])//rcv123 - ячейка памяти
+    /* useState = массив
+        [tasks, setTasks] - tasks - свойство, setTasks - метод*/
+    const removeTask = (id: number) => {
+        /*tasks = tasks.filter(value=>value.id !== id)  //rcv124 ячейка памяти изменилась с помощью setTasks
+        setTasks(tasks)*/
+        setTasks(tasks.filter(value=>value.id !== id))
+    }
 
-    const [filterValue, setFilterValue] =useState<FilterType>("All")
+   /* const [filterValue, setFilterValue] =useState<FilterType>("All")
 
     let isDoneTrue = tasks
     if (filterValue === "Active") {
@@ -24,19 +31,10 @@ function App() {
 
     const filteredTasks=(valueFilter: FilterType) => {
         setFilterValue(valueFilter)
-
         // если 'all' - то дай все
         // если 'Active' - то дай активные
         // если 'Completed' - то дай завершенные
-    }
-
-    const removeTask = (id: number) => {
-        /*tasks = tasks.filter(value=>value.id !== id)  //rcv124 ячейка памяти изменилась с помощью setTasks
-        setTasks(tasks)*/
-        setTasks(tasks.filter(value=>value.id !== id))
-    }
-   /* useState = массив
-        [tasks, setTasks] - tasks - свойство, setTasks - метод*/
+    }*/
     return (
         <div className="App">
             <Todolist title="What to learn"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FilterType} from "./App";
 
 type TaskType = {
@@ -16,6 +16,22 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
+    const [filterValue, setFilterValue] =useState<FilterType>("All")
+
+    let isDoneTrue = tasks
+    if (filterValue === "Active") {
+        isDoneTrue = tasks.filter(value => value.isDone)
+    }
+    if (filterValue === "Completed") {
+        isDoneTrue = tasks.filter(value => !value.isDone)
+    }
+
+    const filteredTasks=(valueFilter: FilterType) => {
+        setFilterValue(valueFilter)
+        // если 'all' - то дай все
+        // если 'Active' - то дай активные
+        // если 'Completed' - то дай завершенные
+    }
     return <div>
         <h3>{props.title}</h3>
         <div>
