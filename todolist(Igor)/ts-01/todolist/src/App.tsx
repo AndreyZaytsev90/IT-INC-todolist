@@ -10,8 +10,11 @@ function App() {
         { id: 3, title: "ReactJS", isDone: false }
     ])//rcv123 - ячейка памяти
 
-    let isDoneTrue = tasks.filter(value=>value.isDone === true)
+    let isDoneTrue = (tasks.filter(value =>value.isDone === true))
 
+    const filteredTasks=(valueFilter: string) => {
+        console.log(valueFilter)
+    }
 
     const removeTask = (id: number) => {
         /*tasks = tasks.filter(value=>value.id !== id)  //rcv124 ячейка памяти изменилась с помощью setTasks
@@ -25,7 +28,7 @@ function App() {
             <Todolist title="What to learn"
                       tasks={isDoneTrue}
                       removeTask={removeTask}
-
+                      filteredTasks={filteredTasks}
             />
         </div>
     );
