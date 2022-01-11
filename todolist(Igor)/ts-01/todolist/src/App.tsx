@@ -10,10 +10,19 @@ function App() {
         { id: 3, title: "ReactJS", isDone: false }
     ])//rcv123 - ячейка памяти
 
-    let isDoneTrue = (tasks.filter(value =>value.isDone === true))
+    const [filterValue, setFilterValue] =useState("all")
+    console.log(filterValue)
+
+/*    // если 'Active'
+    let isDoneTrue = (tasks.filter(value =>value.isDone === true)) 
+    // если 'Completed'
+    let isDoneTrue = (tasks.filter(value =>value.isDone === false))*/
 
     const filteredTasks=(valueFilter: string) => {
-        console.log(valueFilter)
+        setFilterValue(valueFilter)
+        // если 'all' - то дай все
+        // если 'Active' - то дай активные
+        // если 'Completed' - то дай завершенные
     }
 
     const removeTask = (id: number) => {
@@ -26,7 +35,7 @@ function App() {
     return (
         <div className="App">
             <Todolist title="What to learn"
-                      tasks={isDoneTrue}
+                      tasks={tasks}
                       removeTask={removeTask}
                       filteredTasks={filteredTasks}
             />
