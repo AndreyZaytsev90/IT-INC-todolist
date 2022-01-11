@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 
+export type FilterType = "All" | "Active" | "Completed"
+
 function App() {
 
     const [tasks, setTasks] = useState( [
@@ -10,16 +12,19 @@ function App() {
         { id: 3, title: "ReactJS", isDone: false }
     ])//rcv123 - ячейка памяти
 
-    const [filterValue, setFilterValue] =useState("all")
-    console.log(filterValue)
+    const [filterValue, setFilterValue] =useState<FilterType>("All")
 
-/*    // если 'Active'
-    let isDoneTrue = (tasks.filter(value =>value.isDone === true)) 
-    // если 'Completed'
-    let isDoneTrue = (tasks.filter(value =>value.isDone === false))*/
+    let isDoneTrue = tasks
+    if (filterValue === "Active") {
+        isDoneTrue = tasks.filter(value => value.isDone)
+    }
+    if (filterValue === "Completed") {
+        isDoneTrue = tasks.filter(value => !value.isDone)
+    }
 
-    const filteredTasks=(valueFilter: string) => {
+    const filteredTasks=(valueFilter: FilterType) => {
         setFilterValue(valueFilter)
+
         // если 'all' - то дай все
         // если 'Active' - то дай активные
         // если 'Completed' - то дай завершенные
@@ -35,7 +40,7 @@ function App() {
     return (
         <div className="App">
             <Todolist title="What to learn"
-                      tasks={tasks}
+                      tasks={isDoneTrue}
                       removeTask={removeTask}
                       filteredTasks={filteredTasks}
             />
