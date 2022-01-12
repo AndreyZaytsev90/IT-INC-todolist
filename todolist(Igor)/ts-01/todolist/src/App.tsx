@@ -38,9 +38,9 @@ function App() {
     return (
         <div className="App">
             <Todolist title="What to learn"
-                      tasks={isDoneTrue}
+                      tasks={tasks}
                       removeTask={removeTask}
-                      filteredTasks={filteredTasks}
+                     // filteredTasks={filteredTasks}
             />
         </div>
     );
