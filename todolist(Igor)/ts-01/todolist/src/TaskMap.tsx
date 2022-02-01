@@ -9,15 +9,15 @@ type TaskMapProspType = {
     onClickHandler : (tID: string) => void
 }
 
-export const TaskMap = (props: TaskMapProspType) => {
+export const TaskMap = ({tasks, onChangeCheckBox, onClickHandler, ...props }: TaskMapProspType) => {
     return (
             <ul>
                 {
-                    props.tasks.map(t => {
+                    tasks.map(t => {
                         return <li key={t.id} className={t.isDone ? style.isDone : ''}>
-                            <input type="checkbox" checked={t.isDone} onChange={ (event) => props.onChangeCheckBox (t.id, event.currentTarget.checked)}/>
+                            <input type="checkbox" checked={t.isDone} onChange={ (event) => onChangeCheckBox (t.id, event.currentTarget.checked)}/>
                             <span>{t.title}</span>
-                            <button onClick={ (event) => props.onClickHandler(t.id) }>x</button>
+                            <button onClick={ (event) => onClickHandler(t.id) }>x</button>
                         </li>
                     })
                 }
