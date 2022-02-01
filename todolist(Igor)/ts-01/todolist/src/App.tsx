@@ -26,6 +26,12 @@ function App() {
         setTasks(newTasks);
     }
 
+    function ChangeCheckBoxStatus(id: string, checked: boolean) {
+        setTasks(tasks.map(m => m.id === id ? {...m, isDone: checked} : m))
+        console.log(checked)
+
+    }
+
     let [filter, setFilter] = useState<FilterValuesType>("all");
 
     let tasksForTodolist = tasks;
@@ -44,12 +50,13 @@ function App() {
 
     return (
         <div className="App">
-            <Todolist
-                title="What to learn"
-                tasks={tasksForTodolist}
-                removeTask={removeTask}
-                changeFilter={changeFilter}
-                addTask={addTask}/>
+            <Todolist title="What to learn"
+                      tasks={tasksForTodolist}
+                      removeTask={removeTask}
+                      changeFilter={changeFilter}
+                      addTask={addTask}
+                      ChangeCheckBoxStatus={ChangeCheckBoxStatus}
+                      filter={filter}/>
         </div>
     );
 }
