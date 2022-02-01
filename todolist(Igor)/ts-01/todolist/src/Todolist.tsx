@@ -1,8 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
 import style from './Todolist.module.css'
+import {TaskMap} from "./TaskMap";
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
@@ -65,16 +66,12 @@ export function Todolist(props: PropsType) {
             <button onClick={addTask}>+</button>
             {error &&<div className={style.errorMessage}>Title is required!</div>}
         </div>
-        <ul>
+        <TaskMap tasks={props.tasks}
+                 onChangeCheckBox={onChangeCheckBox}
+                 onClickHandler={onClickHandler}/>
+       {/* <ul>
             {
                 props.tasks.map(t => {
-
-                    /*const onClickHandler = () => props.removeTask(t.id)*/
-
-                    /*const onChangeCheckBox = (event: ChangeEvent<HTMLInputElement>) => {
-                        props.ChangeCheckBoxStatus(t.id, event.currentTarget.checked)
-                    }*/
-
                     return <li key={t.id} className={t.isDone ? style.isDone : ''}>
                         <input type="checkbox" checked={t.isDone} onChange={ (event) => onChangeCheckBox (t.id, event.currentTarget.checked)}/>
                         <span>{t.title}</span>
@@ -82,7 +79,7 @@ export function Todolist(props: PropsType) {
                     </li>
                 })
             }
-        </ul>
+        </ul>*/}
         <div>
             <button className={props.filter === 'all' ? style.activeFilter: ''} onClick={ onAllClickHandler }>All</button>
             <button className={props.filter === 'active' ? style.activeFilter: ''} onClick={ onActiveClickHandler }>Active</button>
