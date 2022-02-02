@@ -40,7 +40,7 @@ function App() {
 
 
     function removeTask(todolistId: string, id: string) {
-        setTasks({...tasks, [todolistId]:tasks[todolistId].filter(f=>f.id !== id) })
+        setTasks({...tasks, [todolistId]:tasks[todolistId].filter((f)=>f.id !== id) })
         /*console.log(tasks[todolistId])*/
       /*  let filteredTasks = tasks.filter(t => t.id != id);
         setTasks(filteredTasks);*/
@@ -55,7 +55,7 @@ function App() {
     }
 
     function changeStatus(todolistId: string, taskId: string, isDone: boolean) {
-        setTasks({...tasks, [todolistId]: tasks[todolistId].map(m => m.id === taskId ? {...m, isDone}: m) })
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map((m) => m.id === taskId ? {...m, isDone}: m) })
 
        /* let task = tasks.find(t => t.id === taskId);
         if (task) {
@@ -72,9 +72,10 @@ function App() {
         setTodolists(todolists.map((m) => m.id === todolistId ? {...m, filter:value} : m))
     }
 
-    /*function removeToDoList(todolistId: string) {
-        setTodolists
-    }*/
+    function removeToDoList(todolistId: string, /*id: string*/ ) {
+        setTodolists({...todolists, todolists[todolistId].filter((f) => f.todolistId !== todolistId) })
+        console.log(todolistId)
+    }
 
 
     return (
@@ -99,6 +100,7 @@ function App() {
                         addTask={addTask}
                         changeTaskStatus={changeStatus}
                         filter={tl.filter}
+                        removeToDoList={removeToDoList}
                     />
                 )
             })}
