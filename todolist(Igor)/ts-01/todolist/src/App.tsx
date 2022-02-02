@@ -72,8 +72,9 @@ function App() {
         setTodolists(todolists.map((m) => m.id === todolistId ? {...m, filter:value} : m))
     }
 
-    function removeToDoList(todolistId: string, /*id: string*/ ) {
-        setTodolists({...todolists, todolists[todolistId].filter((f) => f.todolistId !== todolistId) })
+    function removeToDoList(todolistId: string ) {
+        setTodolists(todolists.filter((f) => f.id !== todolistId))
+        setTasks({...tasks, [todolistId]:tasks[todolistId] = [] })
         console.log(todolistId)
     }
 
