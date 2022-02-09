@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
-import AddItemForm from "./AddItemForm";
+import {AddItemForm} from "./components/AddItemForm";
 
 export type FilterValuesType = "all" | "active" | "completed";
+
 type TodolistType = {
     id: string
     title: string
@@ -20,9 +21,11 @@ function App() {
     let todolistId1 = v1();
     let todolistId2 = v1();
 
+
     let [todolists, setTodolists] = useState<Array<TodolistType>>([
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
+
     ])
 
     let [tasks, setTasks] = useState<TasksStateType>({
@@ -34,14 +37,16 @@ function App() {
             {id: v1(), title: "Milk", isDone: true},
             {id: v1(), title: "React Book", isDone: true}
         ]
+
     });
 
-    const editTitleTodolist = (todolistId: string, title: string) => {
-        setTodolists(todolists.map(el => el.id === todolistId ? {...el,title} : el))
+
+    const editTitleTodolist=( todolistId: string,title:string)=>{
+        setTodolists(todolists.map(el=>el.id===todolistId ? {...el,title} : el))
     }
 
-    const editTitleTask = (todolistId: string, taskID: string, title: string) => {
-        setTasks({...tasks,[todolistId]:tasks[todolistId].map(el => el.id === taskID ? {...el,title}: el)})
+    const editTitleTask=(todolistId: string,taskID:string ,title:string)=>{
+        setTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskID ? {...el,title}: el)})
         console.log(title)
     }
 
@@ -64,11 +69,16 @@ function App() {
         setTasks({...tasks});
     }
 
-    const AddTodoList = (newTitle: string) => {
+    const addTodolist = (newTitle: string) => {
         let newID = v1()
         let newTodolist: TodolistType = {id: newID, title: newTitle, filter: "all"}
         setTodolists([newTodolist, ...todolists])
-        setTasks({...tasks, [newID]:[] })
+        setTasks({
+            ...tasks, [newID]: [
+                {id: v1(), title: "Milk", isDone: true},
+                {id: v1(), title: "React Book", isDone: true}
+            ]
+        })
 
     }
 
@@ -102,11 +112,9 @@ function App() {
         setTasks({...tasks});
     }
 
-
-
     return (
         <div className="App">
-            <AddItemForm callBack={AddTodoList} />
+            <AddItemForm callBack={addTodolist}/>
             {
                 todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id];
@@ -133,6 +141,7 @@ function App() {
                         editTitleTodolist={editTitleTodolist}
                         editTitleTask={editTitleTask}
                     />
+
                 })
             }
 
