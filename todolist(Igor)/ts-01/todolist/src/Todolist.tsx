@@ -3,6 +3,7 @@ import {FilterValuesType} from './App';
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {NewComponentMap} from "./components/NewComponentMap";
+import {Button} from "./components/Button";
 
 export type TaskType = {
     id: string
@@ -20,8 +21,8 @@ type PropsType = {
     changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void
     removeTodolist: (id: string) => void
     filter: FilterValuesType
-    editTitleTodolist:(todolistId: string,title: string)=>void
-    editTitleTask:(todolistId: string,taskID:string ,title:string)=>void
+    editTitleTodolist: (todolistId: string, title: string) => void
+    editTitleTask: (todolistId: string, taskID: string, title: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -55,17 +56,21 @@ export function Todolist(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
     const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
 
-    const addTaskHandler=(title:string)=>{
-        props.addTask(title,props.id)
+    const addTaskHandler = (title: string) => {
+        props.addTask(title, props.id)
     }
 
-    const editTitleTodolistHandler=(title:string)=>{
-        props.editTitleTodolist(props.id,title)
+    const editTitleTodolistHandler = (title: string) => {
+        props.editTitleTodolist(props.id, title)
     }
 
     /*const editTitleTaskHandler=(taskID:string ,title:string)=>{
         props.editTitleTask(props.id,taskID,title)
     }*/
+
+    const onClickHandlerTodolist = (value: FilterValuesType, todolistId: string) => {
+
+    }
 
     return <div>
         <h3>
@@ -73,7 +78,7 @@ export function Todolist(props: PropsType) {
             {/*<span>{props.title}</span>*/}
             <button onClick={removeTodolist}>x</button>
         </h3>
-        <AddItemForm callBack={addTaskHandler} />
+        <AddItemForm callBack={addTaskHandler}/>
         <NewComponentMap
             tasks={props.tasks}
             removeTask={props.removeTask}
@@ -81,7 +86,7 @@ export function Todolist(props: PropsType) {
             editTitleTask={props.editTitleTask}
             todolistId={props.id}
         />
-         {/*   <ul>
+        {/*   <ul>
             {
                 props.tasks.map(t => {
                     const onClickHandler = () => props.removeTask(t.id, props.id)
@@ -99,17 +104,19 @@ export function Todolist(props: PropsType) {
                 })
             }
         </ul>*/}
-        <div>
-            <button className={props.filter === 'all' ? "active-filter" : ""}
+        <Button callBack={()=>{}} filter={props.filter} name={props.title}/>
+
+
+        {/*<button className={props.filter === 'all' ? "active-filter" : ""}
                     onClick={onAllClickHandler}>All
-            </button>
-            <button className={props.filter === 'active' ? "active-filter" : ""}
-                    onClick={onActiveClickHandler}>Active
-            </button>
-            <button className={props.filter === 'completed' ? "active-filter" : ""}
-                    onClick={onCompletedClickHandler}>Completed
-            </button>
-        </div>
+            </button>*/}
+        <button className={props.filter === 'active' ? "active-filter" : ""}
+                onClick={onActiveClickHandler}>Active
+        </button>
+        <button className={props.filter === 'completed' ? "active-filter" : ""}
+                onClick={onCompletedClickHandler}>Completed
+        </button>
+
     </div>
 }
 
