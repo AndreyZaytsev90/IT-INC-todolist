@@ -5,7 +5,7 @@ import {FilterValuesType} from "../App";
 export type ButtonPropsType = {
     callBack: () => void
     name: string
-    filter: FilterValuesType
+    filter?: FilterValuesType
 }
 
 export const Button = (props: ButtonPropsType) => {

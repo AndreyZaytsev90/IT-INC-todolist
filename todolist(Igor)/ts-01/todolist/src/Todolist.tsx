@@ -68,9 +68,9 @@ export function Todolist(props: PropsType) {
 
     }
 
-    const onAllClickHandler = () => props.changeFilter("all", props.id);
+    /*const onAllClickHandler = () => props.changeFilter("all", props.id);
     const onActiveClickHandler = () => props.changeFilter("active", props.id);
-    const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
+    const onCompletedClickHandler = () => props.changeFilter("completed", props.id);*/
 
     const changeFiltersHandler = (filterValue: FilterValuesType) => {
         props.changeFilter(filterValue, props.id)
@@ -80,7 +80,8 @@ export function Todolist(props: PropsType) {
         <h3>
             <EditableSpan callBack={editTitleTodolistHandler} title={props.title}/>
             {/*<span>{props.title}</span>*/}
-            <button onClick={removeTodolist}>x</button>
+            {/*<button onClick={removeTodolist}>x</button>*/}
+            <Button callBack={() => {removeTodolist()}} name={"X"}/>
         </h3>
         <AddItemForm callBack={addTaskHandler}/>
         <NewComponentMap
