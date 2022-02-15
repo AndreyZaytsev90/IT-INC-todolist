@@ -2,7 +2,7 @@ import React from 'react';
 import {FilterValuesType} from "../App";
 
 
-type ButtonPropsType = {
+export type ButtonPropsType = {
     callBack: () => void
     name: string
     filter: FilterValuesType
@@ -11,7 +11,7 @@ type ButtonPropsType = {
 export const Button = (props: ButtonPropsType) => {
 
     const onClickHandler = () => {
-        props.callBack
+        props.callBack()
     }
 
     return (

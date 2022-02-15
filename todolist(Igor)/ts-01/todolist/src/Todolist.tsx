@@ -52,10 +52,6 @@ export function Todolist(props: PropsType) {
 
     const removeTodolist = () => props.removeTodolist(props.id)
 
-    const onAllClickHandler = () => props.changeFilter("all", props.id);
-    const onActiveClickHandler = () => props.changeFilter("active", props.id);
-    const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
-
     const addTaskHandler = (title: string) => {
         props.addTask(title, props.id)
     }
@@ -70,6 +66,14 @@ export function Todolist(props: PropsType) {
 
     const onClickHandlerTodolist = (value: FilterValuesType, todolistId: string) => {
 
+    }
+
+    const onAllClickHandler = () => props.changeFilter("all", props.id);
+    const onActiveClickHandler = () => props.changeFilter("active", props.id);
+    const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
+
+    const changeFiltersHandler = (filterValue: FilterValuesType) => {
+        props.changeFilter(filterValue, props.id)
     }
 
     return <div>
@@ -104,18 +108,20 @@ export function Todolist(props: PropsType) {
                 })
             }
         </ul>*/}
-        <Button callBack={()=>{}} filter={props.filter} name={props.title}/>
-
-
-        {/*<button className={props.filter === 'all' ? "active-filter" : ""}
+        <div>
+            <Button callBack={() => {changeFiltersHandler("all")}} filter={props.filter} name={"all"}/>
+            <Button callBack={() => {changeFiltersHandler("active")}} filter={props.filter} name={"active"}/>
+            <Button callBack={() => {changeFiltersHandler("completed")}} filter={props.filter} name={"completed"}/>
+         {/*   <button className={props.filter === 'all' ? "active-filter" : ""}
                     onClick={onAllClickHandler}>All
+            </button>
+            <button className={props.filter === 'active' ? "active-filter" : ""}
+                    onClick={onActiveClickHandler}>Active
+            </button>
+            <button className={props.filter === 'completed' ? "active-filter" : ""}
+                    onClick={onCompletedClickHandler}>Completed
             </button>*/}
-        <button className={props.filter === 'active' ? "active-filter" : ""}
-                onClick={onActiveClickHandler}>Active
-        </button>
-        <button className={props.filter === 'completed' ? "active-filter" : ""}
-                onClick={onCompletedClickHandler}>Completed
-        </button>
+        </div>
 
     </div>
 }
