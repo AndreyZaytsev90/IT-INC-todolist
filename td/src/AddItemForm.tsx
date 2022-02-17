@@ -51,7 +51,7 @@ export function AddItemForm(props: AddItemFormPropsType) {
             size={"small"}/>
         {/*<button onClick={addItem}>+</button>*/}
         <Button variant="contained" onClick={addItem}
-                style={{maxWidth: '26px', maxHeight: '26px', minWidth: '26px', minHeight: '26px'}}>+</Button>
+                style={{maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}}>+</Button>
        {/* {error && <div className="error-message">{error}</div>}*/}
     </div>
 }
