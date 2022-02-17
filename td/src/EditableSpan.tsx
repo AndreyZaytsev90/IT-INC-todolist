@@ -28,7 +28,6 @@ export function EditableSpan(props: EditableSpanPropsType) {
         <TextField
             id="outlined-basic"
             label="Outlined"
-
             variant="outlined"
             value={title}
             onChange={changeTitle}

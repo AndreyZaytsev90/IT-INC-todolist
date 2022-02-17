@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button, TextField} from "@material-ui/core";
+import {Button, IconButton, TextField} from "@material-ui/core";
+import {AddBox} from "@material-ui/icons";
 
 
 
@@ -50,8 +51,11 @@ export function AddItemForm(props: AddItemFormPropsType) {
            // className={error ? "error" : ""}
             size={"small"}/>
         {/*<button onClick={addItem}>+</button>*/}
-        <Button variant="contained" onClick={addItem}
-                style={{maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}}>+</Button>
+        {/*<Button variant="contained" onClick={addItem}
+                style={{maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}}>+</Button>*/}
+        <IconButton color={"primary"} onClick={addItem} >
+            <AddBox />
+        </IconButton>
        {/* {error && <div className="error-message">{error}</div>}*/}
     </div>
 }
