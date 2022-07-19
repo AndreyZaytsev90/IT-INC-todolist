@@ -73,13 +73,9 @@ export function Todolist(props: PropsType) {
 
                     const onClickHandler = () => props.removeTask(props.todolistID,t.id)
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        props.changeTaskStatus(props.todolistID, t.id, e.currentTarget.checked)
-                    }
+                        props.changeTaskStatus(props.todolistID, t.id, e.currentTarget.checked)}
 
-                    return <li key={t.id}>
-                        <input type="checkbox"
-                               onChange={onChangeHandler}
-                               checked={t.isDone}/>
+                    return <li key={t.id}><input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
                         <span>{t.title}</span>
                         <button onClick={ onClickHandler }>x</button>
                     </li>
