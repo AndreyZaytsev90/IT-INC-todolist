@@ -55,6 +55,7 @@ function App() {
     const task = {id: v1(), title: title, isDone: false}
     let todolistTasks = tasks[todolistId] // достанем нужный массив по todolistId
     tasks[todolistId] = [task, ...todolistTasks] // перезапишим в этом объекте массив для нужного тудулиста копией, добавив в начало новую таску
+    setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
   }
   const changeTaskStatus = (todolistId: string, taskId: string, isDone: boolean) => {
     let todolistTasks = tasks[todolistId] // достанем нужный массив по todolistId
