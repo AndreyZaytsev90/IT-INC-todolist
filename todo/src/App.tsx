@@ -23,11 +23,6 @@ function App() {
   let todolistID1 = v1()
   let todolistID2 = v1()
 
-  let [todolists, setTodolists] = useState<Array<TodolistsType>>([
-    {id: todolistID1, title: 'What to learn', filter: 'all'},
-    {id: todolistID2, title: 'What to buy', filter: 'all'},
-  ])
-
   let [tasks, setTasks] = useState<TasksStateType>({
     [todolistID1]: [
       {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -40,33 +35,17 @@ function App() {
       {id: v1(), title: 'GraphQL', isDone: false},
     ]
   })
-
   //Tasks
   const removeTask = (taskId: string, todolistId: string) => {
     let todolistTasks = tasks[todolistId] // достанем нужный массив по todolistId
     tasks[todolistId] = todolistTasks.filter(task => task.id !== taskId) // перезапишим в этом объекте массив для нужного тудулиста с отфильтрованным массивом
     setTasks({...tasks})
   }
-  const changeFilter = (filter: FilterValuesType, todolistId: string) => {
-    let todolist = todolists.find(tl => tl.id === todolistId)
-    if (todolist) {
-      todolist.filter = filter
-      setTodolists([...todolists])
-    }
-  }
   const addTask = (title: string, todolistId: string) => {
     const task = {id: v1(), title: title, isDone: false}
     let todolistTasks = tasks[todolistId] // достанем нужный массив по todolistId
     tasks[todolistId] = [task, ...todolistTasks] // перезапишим в этом объекте массив для нужного тудулиста копией, добавив в начало новую таску
     setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-  }
-  const changeTaskStatus = (todolistId: string, taskId: string, isDone: boolean) => {
-    let todolistTasks = tasks[todolistId] // достанем нужный массив по todolistId
-    let task = todolistTasks.find(task => task.id === taskId) // найдем нужную таску
-    if (task) { // изменим таску, если она нашлась
-      task.isDone = isDone
-      setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-    }
   }
   const changeTaskTitle = (todolistId: string, taskId: string, newTitle: string) => {
     let todolistTasks = tasks[todolistId]
@@ -76,14 +55,25 @@ function App() {
       setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
     }
   }
+  const changeTaskStatus = (todolistId: string, taskId: string, isDone: boolean) => {
+    let todolistTasks = tasks[todolistId] // достанем нужный массив по todolistId
+    let task = todolistTasks.find(task => task.id === taskId) // найдем нужную таску
+    if (task) { // изменим таску, если она нашлась
+      task.isDone = isDone
+      setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+    }
+  }
 
+  let [todolists, setTodolists] = useState<Array<TodolistsType>>([
+    {id: todolistID1, title: 'What to learn', filter: 'all'},
+    {id: todolistID2, title: 'What to buy', filter: 'all'},
+  ])
   //TodoLists
   const removeTodolist = (todolistId: string) => {
     setTodolists(todolists.filter(todolist => todolist.id !== todolistId)) // добавим в стейт список тудулистов, id которых не равны тому, который нужно удалить
     delete tasks[todolistId] // удалим таски для этого тудулиста из второго стэйта, где мы отдельно храним таски
     setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
   }
-
   const addTodoList = (title: string) => {
     let newTodoListId = v1()
     let newTodoList: TodolistsType = {id: newTodoListId, title: title, filter: 'all'}
@@ -93,11 +83,17 @@ function App() {
       [newTodoListId]: []
     })
   }
-
   const changeTodolistTitle = (todolistId: string, newTitle: string) => {
     let todolist = todolists.find(todolist => todolist.id === todolistId)
     if (todolist) {
       todolist.title = newTitle
+      setTodolists([...todolists])
+    }
+  }
+  const changeFilter = (filter: FilterValuesType, todolistId: string) => {
+    let todolist = todolists.find(tl => tl.id === todolistId)
+    if (todolist) {
+      todolist.filter = filter
       setTodolists([...todolists])
     }
   }
