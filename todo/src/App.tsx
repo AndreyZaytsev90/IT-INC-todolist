@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import TodoList, {TasksPropsType} from "./TodoList";
 import {v1} from "uuid";
+import {AddItemForm} from "./AddItemForm";
 
 export type FilterValuesType = "all" | "active" | "completed"
 
@@ -65,6 +66,14 @@ function App() {
       setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
     }
   }
+  const changeTaskTitle = (todolistId: string, taskId: string, newTitle: string) => {
+    let todolistTasks = tasks[todolistId]
+    let task = todolistTasks.find(task => task.id === taskId)
+    if (task) { // изменим таску, если она нашлась
+      task.title = newTitle
+      setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
+    }
+  }
 
   //TodoLists
   const removeTodolist = (todolistId: string) => {
@@ -73,8 +82,27 @@ function App() {
     setTasks({...tasks}) // заcетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
   }
 
+  const addTodoList = (title: string) => {
+    let newTodoListId = v1()
+    let newTodoList: TodolistsType = {id: newTodoListId, title: title, filter: 'all'}
+    setTodolists([newTodoList, ...todolists])
+    setTasks({
+      ...tasks,
+      [newTodoListId]: []
+    })
+  }
+
+  const changeTodolistTitle = (todolistId: string, newTitle: string) => {
+    let todolist = todolists.find(todolist => todolist.id === todolistId)
+    if(todolist) {
+      todolist.title = newTitle
+      setTodolists([...todolists])
+    }
+  }
+
   return (
     <div className="App">
+      <AddItemForm addItem={addTodoList}/>
       {
         todolists.map((todolist) => {
           let allTodolistTasks = tasks[todolist.id]
@@ -96,6 +124,8 @@ function App() {
                       addTask={addTask}
                       changeTaskStatus={changeTaskStatus}
                       removeTodolist={removeTodolist}
+                      changeTaskTitle={changeTaskTitle}
+                      changeTodolistTitle={changeTodolistTitle}
                       filter={todolist.filter}/>
           )
         })}
