@@ -8,7 +8,7 @@ import {Container, Grid, Paper} from "@mui/material";
 
 export type FilterValuesType = "all" | "active" | "completed"
 
-type TodolistsType = {
+export type TodolistsType = {
   id: string
   title: string
   filter: FilterValuesType
@@ -90,7 +90,7 @@ function App() {
       setTodolists([...todolists])
     }
   }
-  const changeFilter = (filter: FilterValuesType, todolistId: string) => {
+  const changeTodolistFilter = (filter: FilterValuesType, todolistId: string) => {
     let todolist = todolists.find(tl => tl.id === todolistId)
     if (todolist) {
       todolist.filter = filter
@@ -124,7 +124,7 @@ function App() {
                             title={todolist.title}
                             tasks={taskForTodoList}
                             removeTask={removeTask}
-                            changeFilter={changeFilter}
+                            changeFilter={changeTodolistFilter}
                             addTask={addTask}
                             changeTaskStatus={changeTaskStatus}
                             removeTodolist={removeTodolist}
