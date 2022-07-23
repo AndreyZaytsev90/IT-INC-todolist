@@ -11,7 +11,7 @@ import {v1} from "uuid";
 // согласно прописанному type в этом action (инструкции) я поменяю state
 
 
-export const todolistsReducer = (state: Array<TodolistsType>, action: todolistsReducerType) => {
+export const todolistsReducer = (state: Array<TodolistsType>, action: todolistsReducerType): Array<TodolistsType> => {
   switch (action.type) {
     case 'REMOVE-TODOLIST':
       /*let newState = [{...state}]
