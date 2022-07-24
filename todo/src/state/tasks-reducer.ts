@@ -1,10 +1,14 @@
-import {TasksStateType} from "../App";
 import {v1} from "uuid";
 import {AddTodoListType, RemoveTodolistType} from "./todolists-reducer";
+import {TasksPropsType} from "../TodoList";
 
 // меня вызовут и дадут мне стейт (почти всегда объект)
 // и инструкцию (action, тоже объект)
 // согласно прописанному type в этом action (инструкции) я поменяю state
+export type TasksStateType = {
+    [key: string]: Array<TasksPropsType>
+}
+
 
 export const tasksReducer = (state: TasksStateType, action: TasksReducerType): TasksStateType => {
     switch (action.type) {
@@ -46,10 +50,10 @@ export const tasksReducer = (state: TasksStateType, action: TasksReducerType): T
                 [action.payload.todolistId]: []
             }
         case "REMOVE-TODOLIST":
-           /* const stateCopy = {...state}
-            delete stateCopy[action.payload.todolistId1]
-            return stateCopy*/
-            let {[action.payload.todolistId1]: [], ...rest} = {...state} // удаление через де структуризацию объекта
+            /* const stateCopy = {...state}
+             delete stateCopy[action.payload.todolistId1]
+             return stateCopy*/
+            let {[action.payload.todolistId]: [], ...rest} = {...state} // удаление через де структуризацию объекта
             return rest
 
         default:
@@ -83,10 +87,10 @@ export const addTaskAC = (title: string, todolistId: string) => {
         payload: {title, todolistId}
     } as const
 }
-export const changeTaskStatusAC = (taskId: string, isDone: boolean, todolistId: string) => {
+export const changeTaskStatusAC = (todolistId: string, taskId: string, isDone: boolean) => {
     return {
         type: 'CHANGE-TASK-STATUS',
-        payload: {taskId, isDone, todolistId}
+        payload: {todolistId, taskId, isDone}
     } as const
 }
 export const changeTaskTitleAC = (todolistId: string, taskId: string, newTaskTitle: string) => {
