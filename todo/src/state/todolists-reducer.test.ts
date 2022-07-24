@@ -25,7 +25,7 @@ test.skip('correct todolist should be removed', () => {
 })
 
 
-test.skip('correct todolist should be added', () => {
+test('correct todolist should be added', () => {
   let todolistId1 = v1()
   let todolistId2 = v1()
 
