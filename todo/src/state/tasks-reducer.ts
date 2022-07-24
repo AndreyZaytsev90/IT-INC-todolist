@@ -9,8 +9,9 @@ export type TasksStateType = {
     [key: string]: Array<TasksPropsType>
 }
 
+let initialState: TasksStateType = {}
 
-export const tasksReducer = (state: TasksStateType, action: TasksReducerType): TasksStateType => {
+export const tasksReducer = (state: TasksStateType = initialState, action: TasksReducerType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASKS':
             return {
@@ -57,7 +58,8 @@ export const tasksReducer = (state: TasksStateType, action: TasksReducerType): T
             return rest
 
         default:
-            throw new Error('I don\'t understand this type')
+            /*throw new Error('I don\'t understand this type')*/
+            return state
     }
 }
 
