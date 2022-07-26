@@ -1,15 +1,9 @@
 import {v1} from "uuid";
+import {FilterValuesType, TodolistsType} from "../AppWithRedux";
 
 // меня вызовут и дадут мне стейт (почти всегда объект)
 // и инструкцию (action, тоже объект)
 // согласно прописанному type в этом action (инструкции) я поменяю state
-export type FilterValuesType = "all" | "active" | "completed"
-
-export type TodolistsType = {
-    id: string
-    title: string
-    filter: FilterValuesType
-}
 
 let initialState: Array<TodolistsType> = []
 

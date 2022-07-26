@@ -20,7 +20,7 @@ beforeEach(() => {
 })
 
 test('correct task should be deleted from correct array', () => {
-  const action = removeTaskAC('2', 'todolistId2')
+  const action = removeTaskAC('todolistId2','2' )
   const endState = tasksReducer(startState, action)
   expect(endState).toEqual({
     'todolistId1': [
@@ -36,7 +36,7 @@ test('correct task should be deleted from correct array', () => {
 })
 
 test('correct task should be added to correct array', () => {
-  const action = addTaskAC('juce', 'todolistId2')
+  const action = addTaskAC('todolistId2', 'juce')
   const endState = tasksReducer(startState, action)
 
   expect(endState['todolistId1'].length).toBe(3)

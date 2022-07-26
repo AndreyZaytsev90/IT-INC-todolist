@@ -1,13 +1,13 @@
 import {v1} from "uuid";
 import {AddTodoListType, RemoveTodolistType} from "./todolists-reducer";
-import {TasksPropsType} from "../TodoList";
+import {TasksStateType} from "../AppWithRedux";
+
+
 
 // меня вызовут и дадут мне стейт (почти всегда объект)
 // и инструкцию (action, тоже объект)
 // согласно прописанному type в этом action (инструкции) я поменяю state
-export type TasksStateType = {
-    [key: string]: Array<TasksPropsType>
-}
+
 
 let initialState: TasksStateType = {}
 
@@ -77,16 +77,16 @@ type AddTaskType = ReturnType<typeof addTaskAC>
 type ChangeTaskTitleType = ReturnType<typeof changeTaskTitleAC>
 type ChangeTaskStatusType = ReturnType<typeof changeTaskStatusAC>
 
-export const removeTaskAC = (taskId: string, todolistId: string) => {
+export const removeTaskAC = (todolistId: string, taskId: string) => {
     return {
         type: 'REMOVE-TASKS',
-        payload: {taskId, todolistId}
+        payload: {todolistId, taskId }
     } as const
 }
-export const addTaskAC = (title: string, todolistId: string) => {
+export const addTaskAC = (todolistId: string, title: string) => {
     return {
         type: 'ADD-TASK',
-        payload: {title, todolistId}
+        payload: {todolistId, title }
     } as const
 }
 export const changeTaskStatusAC = (todolistId: string, taskId: string, isDone: boolean) => {

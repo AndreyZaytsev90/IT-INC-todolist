@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
-import TodoList, {TasksPropsType} from "./TodoList";
+import TodoList from "./TodoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppHeader} from "./AppHeader";
 import {Container, Grid, Paper} from "@mui/material";
+import {TasksType} from "./AppWithRedux";
 
 export type FilterValuesType = "all" | "active" | "completed"
 
@@ -15,7 +16,7 @@ export type TodolistsType = {
 }
 
 export type TasksStateType = {
-  [key: string]: Array<TasksPropsType>
+  [key: string]: Array<TasksType>
 }
 
 function App() {
@@ -90,7 +91,7 @@ function App() {
       setTodolists([...todolists])
     }
   }
-  const changeTodolistFilter = (filter: FilterValuesType, todolistId: string) => {
+  const changeTodolistFilter = (todolistId: string, filter: FilterValuesType ) => {
     let todolist = todolists.find(tl => tl.id === todolistId)
     if (todolist) {
       todolist.filter = filter
