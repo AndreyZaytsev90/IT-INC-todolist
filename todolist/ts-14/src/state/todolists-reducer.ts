@@ -96,11 +96,11 @@ export const setTodosAC = (todos: TodolistType[]) => {
 export type SetTodosType = ReturnType<typeof setTodosAC>
 
 
-export const fetchTodolistsTC = (todolistId: string) => {
-  return (dispatch: Dispatch, getState: () => AppRootStateType) => {
-    todolistsAPI.deleteTodolist(todolistId)
-      .then(res => {
-        dispatch(actionCreator(todolistId))
+export const fetchTodolistsTC = () => {
+  return (dispatch: Dispatch) => {
+    todolistsAPI.getTodolists()
+      .then((res) => {
+        dispatch(setTodosAC(res.data))
       })
   }
 };
