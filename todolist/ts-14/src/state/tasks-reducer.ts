@@ -156,10 +156,10 @@ export const fetchTasksTC = (todolistId: string) => {
 
 export const removeTasksTC = (todolistId: string, taskId: string) => async (dispatch: Dispatch) => {
   try {
-    const response = await todolistsAPI.deleteTask(todolistId, taskId)
-    if (response.data.resultCode === 0) {
+    await todolistsAPI.deleteTask(todolistId, taskId)
+
       dispatch(removeTaskAC(taskId, todolistId))
-    }
+
   } catch (e) {
   }
 }

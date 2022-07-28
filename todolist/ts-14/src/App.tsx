@@ -45,7 +45,7 @@ function App() {
   const dispatch = useDispatch();
 
   const removeTask = useCallback(function (id: string, todolistId: string) {
-    const thunk = removeTasksTC(id, todolistId);
+    const thunk = removeTasksTC(todolistId, id );
     dispatch(thunk);
   }, []);
 
