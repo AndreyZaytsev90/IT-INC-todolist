@@ -46,8 +46,8 @@ export const DeleteTask = () => {
 export const UpdateTaskTitle = () => {
   const [state, setState] = useState<any>(null)
   useEffect(() => {
-    const taskId = 'f258b36d-7c5e-4571-9cd4-7b7dbca85db6'
-    taskAPI.updateTask(taskId, "TASK-3")
+    const taskId = '3f858cc7-3c2f-43f3-b4e6-47e52f9b4c9b'
+    taskAPI.updateTask(taskId, "TASK-4")
       .then((res) => {
         setState(res.data)
       })
