@@ -8,12 +8,11 @@ import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./
 import {
   addTodoListAC,
   changeTodolistFilterAC,
-  changeTodolistTitleAC,
-  removeTodolistAC, setTodolistAC,
+  changeTodolistTitleAC, fetchTodolistsThunk,
+  removeTodolistAC,
 } from "./state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store/store";
-import {todolistAPI} from "./api/todolist-api";
 
 
 export type FilterValuesType = "all" | "active" | "completed"
@@ -76,10 +75,8 @@ function AppWithRedux() {
   }, [])
 
   useEffect(() => {
-    todolistAPI.getTodolists()
-        .then((response) => {
-          dispatch(setTodolistAC(response.data))
-        })
+    // @ts-ignore
+    dispatch(fetchTodolistsThunk)
   }, [])
 
   return (

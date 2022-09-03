@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {FilterValuesType, TodolistsType} from "../AppWithRedux";
-import {TodolistType} from "../api/todolist-api";
+import {todolistAPI, TodolistType} from "../api/todolist-api";
+import {Dispatch} from "redux";
 
 // меня вызовут и дадут мне стейт (почти всегда объект)
 // и инструкцию (action, тоже объект)
@@ -89,4 +90,14 @@ export const setTodolistAC = (todolist: Array<TodolistType>) => {
         type: "SET-TODOLIST",
         payload: {todolist: todolist}
     } as const
+}
+
+//Санка
+export const fetchTodolistsThunk = (dispatch: Dispatch)=> {
+    // Внутри санки можно делать побочные эффекты (запросы на сервер)
+    todolistAPI.getTodolists()
+        .then((response) => {
+            // и диспатчить экшены (Action) или другие санки (Thunk)
+            dispatch(setTodolistAC(response.data))
+        })
 }
