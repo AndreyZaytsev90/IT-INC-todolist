@@ -1,5 +1,6 @@
 import {v1} from "uuid";
 import {FilterValuesType, TodolistsType} from "../AppWithRedux";
+import {TodolistType} from "../api/todolist-api";
 
 // меня вызовут и дадут мне стейт (почти всегда объект)
 // и инструкцию (action, тоже объект)
@@ -33,6 +34,8 @@ export const todolistsReducer = (state: Array<TodolistsType> = initialState, act
             return state.map(tl => tl.id === action.payload.todolistId
                 ? {...tl, filter: action.payload.newFilter}
                 : tl)
+        case "SET-TODOLIST" :
+            return action.payload.todolist.map((tl) => ({...tl, filter: "all"}))
         default:
             /*throw new Error('I don\'t understand this type')*/
             return state
@@ -43,12 +46,14 @@ export type TodolistsReducerType =
     RemoveTodolistType |
     AddTodoListType |
     ChangeTodolistTitleType |
-    ChangeTodolistFilterType
+    ChangeTodolistFilterType |
+    SetTodolistType
 
 export type RemoveTodolistType = ReturnType<typeof removeTodolistAC>
 export type AddTodoListType = ReturnType<typeof addTodoListAC>
 type ChangeTodolistTitleType = ReturnType<typeof changeTodolistTitleAC>
 type ChangeTodolistFilterType = ReturnType<typeof changeTodolistFilterAC>
+export type SetTodolistType = ReturnType<typeof setTodolistAC>
 
 
 export const removeTodolistAC = (todolistId1: string) => {
@@ -76,5 +81,12 @@ export const changeTodolistFilterAC = (todolistId2: string, newFilter: FilterVal
     return {
         type: 'CHANGE-TODOLIST-FILTER',
         payload: {todolistId: todolistId2, newFilter}
+    } as const
+}
+
+export const setTodolistAC = (todolist: Array<TodolistType>) => {
+    return {
+        type: "SET-TODOLIST",
+        payload: {todolist: todolist}
     } as const
 }
