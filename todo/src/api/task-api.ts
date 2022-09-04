@@ -13,7 +13,7 @@ const instance = axios.create({
   },
 })
 
-export type ResponseTaskType<T> = {
+/*export type ResponseTaskType<T> = {
   data: T;
   messages: Array<string>;
   fieldsErrors: Array<string>;
@@ -27,15 +27,15 @@ export type T = {
 export type TaskType = {
   id: string;
   title: string;
-  todoListId: string;
+  todolistId: string;
   order: number;
   status: number;
   priority: number;
   addedDate: Date
-}
+}*/
 
 export const taskAPI = {
-  getTasks() {
+  /*getTasks() {
     const promise = instance.get<Array<TaskType>>('tasks')
     return promise
   },
@@ -47,6 +47,5 @@ export const taskAPI = {
   },
   updateTask(taskId: string, title: string) {
     return instance.put<ResponseTaskType<{}>>(`tasks/${taskId}`, {title: title})
-  },
-
+  }*/
 }

@@ -1,6 +1,8 @@
 import {v1} from "uuid";
 import {AddTodoListType, RemoveTodolistType, SetTodolistType} from "./todolists-reducer";
-import {TasksStateType} from "../AppWithRedux";
+import {TasksStateType, TasksType} from "../AppWithRedux";
+import {Dispatch} from "redux";
+import {todolistAPI} from "../api/todolist-api";
 
 
 // меня вызовут и дадут мне стейт (почти всегда объект)
@@ -68,12 +70,17 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Tasks
             })
             return copyState
         }
+        case "SET-TASKS": {
+            return {
+                ...state,
+                [action.payload.todolistId]: action.payload.tasks
+            }
+        }
         default:
             /*throw new Error('I don\'t understand this type')*/
             return state
     }
 }
-
 
 type TasksReducerType =
     RemoveTaskType |
@@ -82,14 +89,18 @@ type TasksReducerType =
     ChangeTaskStatusType |
     AddTodoListType |
     RemoveTodolistType |
-    SetTodolistType
+    SetTodolistType |
+    SetTaskType
 
 
 type RemoveTaskType = ReturnType<typeof removeTaskAC>
 type AddTaskType = ReturnType<typeof addTaskAC>
 type ChangeTaskTitleType = ReturnType<typeof changeTaskTitleAC>
 type ChangeTaskStatusType = ReturnType<typeof changeTaskStatusAC>
+type SetTaskType = ReturnType<typeof setTasksAC>
 
+
+// ActionCreators
 export const removeTaskAC = (todolistId: string, taskId: string) => {
     return {
         type: 'REMOVE-TASKS',
@@ -114,4 +125,19 @@ export const changeTaskTitleAC = (todolistId: string, taskId: string, newTaskTit
         payload: {todolistId, taskId, newTaskTitle}
     } as const
 }
+export const setTasksAC = (todolistId: string, tasks: Array<TasksType>) => {
+    return {
+        type: "SET-TASKS",
+        payload: {todolistId, tasks}
+    } as const
+}
 
+// ThunkCreators
+export const fetchTasksTC = (todolistId: string) => {
+    return (dispatch: Dispatch) => {
+        todolistAPI.getTasks(todolistId)
+            .then((res) => {
+                dispatch(setTasksAC(todolistId, res.data.items))
+            })
+    }
+}
