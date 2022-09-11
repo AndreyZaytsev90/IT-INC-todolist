@@ -20,7 +20,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
   const [state, setState] = useState<any>(null)
   useEffect(() => {
-    todolistAPI.createTodolist("TODOLIST-1")
+    todolistAPI.createTodolist("TODOLIST-4")
       .then((res) => {
         setState(res.data)
       })
@@ -32,7 +32,7 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
   const [state, setState] = useState<any>(null)
   useEffect(() => {
-    const todolistId = '5eb59bfc-3550-4627-b6f3-5d8bffd695fb'
+    const todolistId = '3457fbb9-4c4d-4b4c-b9cc-852e2e55549f'
     todolistAPI.deleteTodolist(todolistId)
       .then((res) => {
         setState(res.data)
@@ -44,8 +44,8 @@ export const DeleteTodolist = () => {
 export const UpdateTodolistTitle = () => {
   const [state, setState] = useState<any>(null)
   useEffect(() => {
-    const todolistId = 'b89d8b6b-acb7-465c-8a85-a17592753c75'
-    todolistAPI.updateTodolist(todolistId, "TODOLIST-3")
+    const todolistId = 'ee887034-a49e-4498-9c03-05bda0100281'
+    todolistAPI.updateTodolist(todolistId, "Renault Fluence")
       .then((res) => {
       setState(res.data)
     })

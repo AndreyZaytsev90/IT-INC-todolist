@@ -64,6 +64,7 @@ export const todolistAPI = {
   updateTodolist(todolistId: string, title: string) {
     return instance.put<ResponseType<{}>>(`todo-lists/${todolistId}`, {title: title})
   },
+
   //Tasks
   getTasks(todolistId: string) {
     const promise = instance.get<Array<TaskType>>(`todo-lists/${todolistId}/tasks`)
